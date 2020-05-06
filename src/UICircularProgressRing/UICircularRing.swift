@@ -81,7 +81,7 @@ import UIKit
      ## Author
      Luis Padron
      */
-    open var style: UICircularRingStyle = .inside {
+    open var style: UICircularRingStyle = .ontop {
         didSet { ringLayer.setNeedsDisplay() }
     }
 
@@ -183,7 +183,7 @@ import UIKit
      ## Author
      Luis Padron
      */
-    @IBInspectable open var outerRingWidth: CGFloat = 10.0 {
+    @IBInspectable open var outerRingWidth: CGFloat = 20.0 {
         didSet { ringLayer.setNeedsDisplay() }
     }
 
@@ -196,7 +196,7 @@ import UIKit
      ## Author
      Luis Padron
      */
-    @IBInspectable open var outerRingColor: UIColor = UIColor.gray {
+    @IBInspectable open var outerRingColor: UIColor = UIColor(red: 212/255, green: 234/255, blue: 253/255, alpha: 1){
         didSet { ringLayer.setNeedsDisplay() }
     }
 
@@ -228,7 +228,7 @@ import UIKit
      ## Author
      Luis Padron
      */
-    @IBInspectable open var innerRingWidth: CGFloat = 5.0 {
+    @IBInspectable open var innerRingWidth: CGFloat = 20.0 {
         didSet { ringLayer.setNeedsDisplay() }
     }
 
@@ -241,7 +241,7 @@ import UIKit
      ## Author
      Luis Padron
      */
-    @IBInspectable open var innerRingColor: UIColor = UIColor.blue {
+    @IBInspectable open var innerRingColor: UIColor = UIColor(red: 46/255, green: 156/255, blue: 248/255, alpha: 1.0){
         didSet { ringLayer.setNeedsDisplay() }
     }
 
@@ -345,7 +345,7 @@ import UIKit
     /**
      Set the ring layer to the default layer, cated as custom layer
      */
-    var ringLayer: UICircularRingLayer {
+    public var ringLayer: UICircularRingLayer {
         // swiftlint:disable:next force_cast
         return layer as! UICircularRingLayer
     }
@@ -444,7 +444,7 @@ import UIKit
      They handle starting, pausing and resetting an animation of the ring.
     */
 
-    func startAnimation(duration: TimeInterval, completion: @escaping AnimationCompletion) {
+     func startAnimation(duration: TimeInterval, completion: @escaping AnimationCompletion) {
         if isAnimating {
             animationPauseTime = nil
         }
@@ -464,7 +464,7 @@ import UIKit
                                                         repeats: false)
     }
 
-    func pauseAnimation() {
+    public func pauseAnimation() {
         guard isAnimating else {
             #if DEBUG
             print("""
@@ -493,7 +493,7 @@ import UIKit
         animationCompletionTimer = nil
     }
 
-    func continueAnimation(completion: @escaping AnimationCompletion) {
+     func continueAnimation(completion: @escaping AnimationCompletion) {
         guard let pauseTime = animationPauseTime else {
             #if DEBUG
             print("""

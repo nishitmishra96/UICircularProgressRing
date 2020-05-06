@@ -25,7 +25,7 @@
 
 import UIKit
 
-final public class UICircularProgressRing: UICircularRing {
+open class UICircularProgressRing: UICircularRing {
     // MARK: Members
 
     /**
@@ -100,7 +100,7 @@ final public class UICircularProgressRing: UICircularRing {
      The minimum value for the progress ring. ex: (0) -> 100.
 
      ## Important ##
-     Default = 0.0
+     Default = 100
 
      Must be a non-negative value, the absolute value is taken when setting this property.
 
@@ -120,7 +120,7 @@ final public class UICircularProgressRing: UICircularRing {
      The maximum value for the progress ring. ex: 0 -> (100)
 
      ## Important ##
-     Default = 100.0
+     Default = 100
 
      Must be a non-negative value, the absolute value is taken when setting this property.
 
@@ -253,13 +253,16 @@ final public class UICircularProgressRing: UICircularRing {
 
     // MARK: Overrides
 
-    override func initialize() {
+    override open func initialize() {
         super.initialize()
         ringLayer.ring = self
         ringLayer.value = value
         ringLayer.maxValue = maxValue
         ringLayer.minValue = minValue
         ringLayer.valueFormatter = valueFormatter
+        style = .ontop
+        outerRingWidth = 20
+        innerRingWidth = 20
     }
 
     override func didUpdateValue(newValue: CGFloat) {

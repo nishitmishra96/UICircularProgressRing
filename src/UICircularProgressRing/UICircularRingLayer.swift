@@ -32,25 +32,25 @@ import UIKit
  properties are set in UICircularRing and those are delegated to here.
 
  */
-class UICircularRingLayer: CAShapeLayer {
+public class UICircularRingLayer: CAShapeLayer {
 
     // MARK: Properties
 
-    @NSManaged var value: CGFloat
-    @NSManaged var minValue: CGFloat
-    @NSManaged var maxValue: CGFloat
+    @NSManaged public var value: CGFloat
+    @NSManaged public var minValue: CGFloat
+    @NSManaged public var maxValue: CGFloat
 
     /// the delegate for the value, is notified when value changes
     @NSManaged weak var ring: UICircularRing!
 
     /// formatter for the text of the value label
-    var valueFormatter: UICircularRingValueFormatter?
+    public var valueFormatter: UICircularRingValueFormatter?
 
     // MARK: Animation members
 
-    var animationDuration: TimeInterval = 1.0
-    var animationTimingFunction: CAMediaTimingFunctionName = .easeInEaseOut
-    var animated = false
+    public var animationDuration: TimeInterval = 1.0
+    public var animationTimingFunction: CAMediaTimingFunctionName = .easeInEaseOut
+    public var animated = false
 
     /// the value label which draws the text for the current value
     lazy var valueLabel: UILabel = UILabel(frame: .zero)
@@ -58,10 +58,10 @@ class UICircularRingLayer: CAShapeLayer {
     // MARK: Animatable properties
 
     /// whether or not animatable properties should be animated when changed
-    var shouldAnimateProperties: Bool = false
+    public var shouldAnimateProperties: Bool = false
 
     /// the animation duration for a animatable property animation
-    var propertyAnimationDuration: TimeInterval = 0.0
+    public var propertyAnimationDuration: TimeInterval = 0.0
 
     /// the properties which are animatable
     static let animatableProperties: [String] = ["innerRingWidth", "innerRingColor",
@@ -99,7 +99,7 @@ class UICircularRingLayer: CAShapeLayer {
      Overriden for custom drawing.
      Draws the outer ring, inner ring and value label.
      */
-    override func draw(in ctx: CGContext) {
+    override public func draw(in ctx: CGContext) {
         super.draw(in: ctx)
         UIGraphicsPushContext(ctx)
         // Draw the rings
@@ -120,7 +120,7 @@ class UICircularRingLayer: CAShapeLayer {
     /**
      Watches for changes in the value property, and setNeedsDisplay accordingly
      */
-    override class func needsDisplay(forKey key: String) -> Bool {
+    override public class func needsDisplay(forKey key: String) -> Bool {
         if key == "value" || isAnimatableProperty(key) {
             return true
         } else {
@@ -131,7 +131,7 @@ class UICircularRingLayer: CAShapeLayer {
     /**
      Creates animation when value property is changed
      */
-    override func action(forKey event: String) -> CAAction? {
+    override public func action(forKey event: String) -> CAAction? {
         if event == "value" && animated {
             let animation = CABasicAnimation(keyPath: "value")
             animation.fromValue = presentation()?.value(forKey: "value")
